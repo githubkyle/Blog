@@ -1,4 +1,4 @@
-let XYZ = require("/model/User");
+// let XYZ = require("/model/User");
 let text = document.querySelector("#new-post").value;
 let title = document.querySelector("#new-title").value;
 let email = User.email;

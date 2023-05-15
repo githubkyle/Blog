@@ -19,7 +19,7 @@ User.init(
       allowNull: false,
       unique: true
     },
-    password: {
+    pass: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
