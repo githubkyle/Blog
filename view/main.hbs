@@ -20,14 +20,13 @@
         <a href="/login">Login</a>
         {{/if}}
     </nav>
-    <main>
+    <div>
         <aside>
             <h2>Enjoy the blogs!</h2>
         </aside>
-        <div>
-            {{{body}}}
-        </div>
-    </main>
+        <a href="/CRUD">Search/update/delete a blog post</a>
+        <a href="/blogger">Add a blog post</a>
+    </div>
     {{#if loggedIn}}
     <script src="/js/logout.js"></script>
     {{/if}}
