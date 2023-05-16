@@ -3,13 +3,14 @@ const { BlogPost } = require("../model");
 
 router.get("/", async (req, res) => {
   try {
-    const BlogData = await BlogPost.findAll({});
-
-    const blog = BlogPost.map(blog => blog.get({ plain: true }));
-
-    res.render("homepage", {
-      blog,
-      loggedIn: req.session.loggedIn
+    BlogPost.findAll({
+      attributes: ["title", "text"],
+      include: [
+        {
+          model: User,
+          attributes: ["email"]
+        }
+      ]
     });
   } catch (err) {
     console.log(err);
@@ -22,7 +23,7 @@ router.get("/blogpost/:id", async (req, res) => {
     res.redirect("/login");
   } else {
     try {
-      const BlogData = await BlogPost.findByPk(req.params.id);
+      const BlogData = await BlogPost.findByPk(req);
       const blog = BlogData.get({ plain: true });
       res.render("blogs", { blog, loggedIn: req.session.loggedIn });
     } catch (err) {

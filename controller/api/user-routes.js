@@ -3,16 +3,23 @@ const { User } = require("../../model");
 
 router.post("/", async (req, res) => {
   try {
-    const NewUser = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
-    });
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+      if (err) {
+        return res.status(500).json({ message: "Error hashing password" });
+      }
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res.status(200).json(NewUser);
+      User.create({ username, email, pass: hashedPassword })
+        .then(user => {
+          req.login(user, err => {
+            if (err) {
+              return res.status(500).json({ message: "Error logging in" });
+            }
+            res.json({ user });
+          });
+        })
+        .catch(err => {
+          res.status(500).json({ message: "Error creating user" });
+        });
     });
   } catch (err) {
     console.log(err);
