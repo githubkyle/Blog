@@ -3,21 +3,35 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controller");
-// const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
+const hbs = exphbs.create({});
+const sequelize = require("./config/connection");
+
+// const blogs_db = new Sequelize("blogs_db", "username", "password", {
+//   host: "localhost",
+//   dialect: "mysql",
+//   user: process.env.USER,
+//   password: process.env.PASSWORD,
+//   database: "blogs_db"
+// });
+
+// const db = mysql.createConnection(
+//   {
+//     host: "localhost",
+//     user: process.env.USER,
+//     password: process.env.PASSWORD,
+//     database: "blogs_db"
+//   },
+//   console.log(`Connected to the blogs_db database.`)
+// );
 
 const app = express();
 const PORT = process.env.PORT || 3003;
 
-app.set("view engine", "handlebars");
+app.engine("handlebars", hbs.engine);
 
-app.engine(
-  "handlebars",
-  handlebars({
-    layoutsDir: `${__dirname}/views/layouts`
-  })
-);
+app.set("view engine", "handlebars");
 
 const sess = {
   secret: process.env.SECRET,
@@ -29,16 +43,6 @@ const sess = {
   })
 };
 
-const db = mysql.createConnection(
-  {
-    host: "localhost",
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: "blogs_db"
-  },
-  console.log(`Connected to the blogs_db database.`)
-);
-
 // db.query("SELECT * FROM BlogPost", function(err, results) {
 //   return results;
 // });
@@ -47,7 +51,13 @@ app.get("/", (req, res) => {
   res.render("main", { layout: "index" });
 });
 
-app.use(session(sess));
+app.use(
+  session({
+    secret: "Secretive",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
@@ -55,6 +65,6 @@ app.use(express.static(path.join(__dirname, "view")));
 
 app.use(routes);
 
-// sequelize.sync({ force: false }).then(() => {
-//   app.listen(PORT, () => console.log("Now listening"));
-// });
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log("Now listening"));
+});
