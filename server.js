@@ -8,24 +8,6 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const hbs = exphbs.create({});
 const sequelize = require("./config/connection");
 
-// const blogs_db = new Sequelize("blogs_db", "username", "password", {
-//   host: "localhost",
-//   dialect: "mysql",
-//   user: process.env.USER,
-//   password: process.env.PASSWORD,
-//   database: "blogs_db"
-// });
-
-// const db = mysql.createConnection(
-//   {
-//     host: "localhost",
-//     user: process.env.USER,
-//     password: process.env.PASSWORD,
-//     database: "blogs_db"
-//   },
-//   console.log(`Connected to the blogs_db database.`)
-// );
-
 const app = express();
 const PORT = process.env.PORT || 3003;
 
@@ -43,10 +25,6 @@ const sess = {
   })
 };
 
-// db.query("SELECT * FROM BlogPost", function(err, results) {
-//   return results;
-// });
-
 app.get("/", (req, res) => {
   res.render("main", { layout: "index" });
 });
@@ -59,10 +37,10 @@ app.use(
   })
 );
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "view")));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, "view")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {

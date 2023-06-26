@@ -1,4 +1,4 @@
-import { ConnectionAcquireTimeoutError } from "sequelize";
+// import { ConnectionAcquireTimeoutError } from "sequelize";
 let connection = require("./config/connection");
 let Finder = document.querySelector("#find-post").value;
 let Found = document.querySelector("#finding");
@@ -20,8 +20,8 @@ function updateBlogPost() {
 }
 
 let Nuker = document.querySelector("#nuke-post").value;
-let Found = document.querySelector("#nuking");
-Found.addEventListener(
+let Founded = document.querySelector("#nuking");
+Founded.addEventListener(
   "submit",
   connection.query(`DELETE FROM Posts WHERE Title =${Nuker}`)
 );

@@ -17,15 +17,15 @@
         {{#if loggedIn}}
         <button id="logout" class="btn-no-style">Logout</button>
         {{else}}
-        <a href="/login">Login</a>
+        <a href="/../login">Login</a>
         {{/if}}
     </nav>
     <div>
         <aside>
             <h2>Enjoy the blogs!</h2>
         </aside>
-        <a href="/CRUD">Search/update/delete a blog post</a>
-        <a href="/blogger">Add a blog post</a>
+        <a href="../CRUD">Search/update/delete a blog post</a>
+        <a href="../blogger">Add a blog post</a>
         <ul>{{#each BlogPost}}
             <li>{{this}}</li>
             {{/each}}

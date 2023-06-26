@@ -1,4 +1,3 @@
-
 let text = document.querySelector("#new-post").value;
 let title = document.querySelector("#new-title").value;
 let db = require("./config/connection");
