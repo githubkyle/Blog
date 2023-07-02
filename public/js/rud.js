@@ -2,10 +2,13 @@
 let connection = require("./config/connection");
 let Finder = document.querySelector("#find-post").value;
 let Found = document.querySelector("#finding");
-Found.addEventListener(
-  "submit",
-  connection.query(`SELECT BlogPost FROM Posts WHERE Title =${Finder}`)
-);
+
+let TempFunc = `SELECT BlogPost FROM Posts WHERE Title =${Finder}`;
+
+Found.addEventListener("submit", connection.query(TempFunc));
+
+let ShowPost = document.querySelector("#found-post");
+// ShowPost.innerHTML= (TempFunc.results);
 let Upper = document.querySelector("#up-post").value;
 let UpText = document.querySelector("#up-post-text").value;
 
