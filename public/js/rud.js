@@ -1,5 +1,6 @@
 // import { ConnectionAcquireTimeoutError } from "sequelize";
-// let connection = require("./config/connection");
+import connection from "./config/connection";
+let connection = connection;
 // let Finder = document.querySelector("#find-post").value;
 // let Found = document.querySelector("#finding");
 
@@ -20,7 +21,7 @@ const getBlog = async event => {
 
   if (text && title) {
     const response = await fetch("/model/BlogPost", {
-      method: "POST",
+      method: "GET",
       body: JSON.stringify({ text, title }),
       headers: { "Content-Type": "application/json" }
     });
@@ -28,15 +29,15 @@ const getBlog = async event => {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      alert("Failed to add that blog post.");
+      alert("Failed to get that blog post.");
     }
   }
 };
 
 function updateBlogPost() {
-  const query = `UPDATE BlogPost SET text = ${UpText} WHERE title = ${Upper}`;
-  const values = [blogPost.title, blogPost.text];
-  connection.query(query, values, (error, results) => {
+  // const query = `UPDATE BlogPost SET text = ${UpText} WHERE title = ${Upper}`;
+  // const values = [blogPost.title, blogPost.text];
+  // connection.query(query, values, (error, results) => {
     if (error) throw error;
 
     results = console.log("Blog post updated successfully!");
@@ -51,23 +52,23 @@ Founded.addEventListener(
 );
 
 const nukeBlog = async event => {
-  event.preventDefault();
+  // event.preventDefault();
 
-  let text = document.querySelector("#new-post").value;
-  let title = document.querySelector("#new-title").value;
+  // let text = document.querySelector("#new-post").value;
+  // let title = document.querySelector("#new-title").value;
 
-  if (text && title) {
-    const response = await fetch("/model/BlogPost", {
-      method: "POST",
-      body: JSON.stringify({ text, title }),
-      headers: { "Content-Type": "application/json" }
-    });
+  // if (text && title) {
+  //   const response = await fetch("/model/BlogPost", {
+  //     method: "POST",
+  //     body: JSON.stringify({ text, title }),
+  //     headers: { "Content-Type": "application/json" }
+  //   });
 
-    if (response.ok) {
-      document.location.replace("/");
-    } else {
-      alert("Failed to add that blog post.");
-    }
-  }
+  //   if (response.ok) {
+  //     document.location.replace("/");
+  //   } else {
+  //     alert("Failed to add that blog post.");
+  //   }
+  // }
 };
 module.exports = { updateBlogPost };

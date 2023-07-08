@@ -1,5 +1,5 @@
 const addBlog = async event => {
-  event.preventDefault();
+  // event.preventDefault();
 
   let text = document.querySelector("#new-post").value;
   let title = document.querySelector("#new-title").value;
