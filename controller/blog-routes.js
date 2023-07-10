@@ -27,7 +27,7 @@ router.post("/blogger", async (req, res) => {
     const blogPost = BlogPost.createNew({
       attributes: ["title", "text"]
     });
-    res.render("blogs", { blogPost, loggedIn: req.session.loggedIn });
+    res.render("blogger", { blogPost, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -41,7 +41,7 @@ router.put("/blogger/:id", async (req, res) => {
       { $set: { title: req.body.title, text: req.body.text } },
       { new: true }
     );
-    res.render("blogs", { upBlog, loggedIn: req.session.loggedIn });
+    res.render("blogger", { upBlog, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -51,7 +51,7 @@ router.put("/blogger/:id", async (req, res) => {
 router.delete("/blogger/:id", async (req, res) => {
   try {
     await BlogPost.findOneAndDelete({ _id: req.params.id });
-    res.render("blogs");
+    res.render("blogger");
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -66,17 +66,17 @@ router.get("/CRUD", async (req, res) => {
 });
 
 router.get("/blogger", async (req, res) => {
-  await res.render("blogs");
+  await res.render("blogger");
 });
 
-router.get("/blogpost/:id", async (req, res) => {
+router.get("/blogger/:id", async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect("/login");
   } else {
     try {
       const BlogData = await BlogPost.findByPk(req);
       const blog = BlogData.get({ plain: true });
-      res.render("blogs", { blog, loggedIn: req.session.loggedIn });
+      res.render("blogger", { blog, loggedIn: req.session.loggedIn });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -98,7 +98,7 @@ router.get("/", async (req, res) => {
     });
 
     // Render the blog posts view and pass the data
-    res.render("blogs", { blogPosts, loggedIn: req.session.loggedIn });
+    res.render("blogger", { blogPosts, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
