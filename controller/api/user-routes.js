@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { User } = require("../../model");
+const { User } = require("../../model/User");
 
-router.post("/user", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     bcrypt.hash(password, 10, (err, hashedPassword) => {
       if (err) {
