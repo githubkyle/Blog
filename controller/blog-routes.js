@@ -1,25 +1,6 @@
 const router = require("express").Router();
 const { BlogPost } = require("../model/BlogPost");
 
-// This route is already coded down below last
-// router.get("/", async (req, res) => {
-//   try {
-//     BlogPost.findAll({
-//       attributes: ["title", "text"],
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["email"]
-//         }
-//       ]
-//     });
-//     res.render("blogs");
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
 //CRUD ROUTES
 
 router.post("/blogger", async (req, res) => {
