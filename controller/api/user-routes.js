@@ -26,7 +26,9 @@ router.post("/signup", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+router.get("/dummyAPIindex", (req, res) => {
+  res.status(200).json({ message: "Dummy route worked" });
+});
 router.post("/login", async (req, res) => {
   try {
     const Logging = await User.findOne({

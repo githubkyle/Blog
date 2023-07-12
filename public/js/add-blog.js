@@ -5,7 +5,7 @@ const addBlog = async event => {
   let title = document.querySelector("#new-title").value;
 
   if (text && title) {
-    const response = await fetch("/model/BlogPost", {
+    const response = await fetch("/api", {
       method: "POST",
       body: JSON.stringify({ text, title }),
       headers: { "Content-Type": "application/json" }

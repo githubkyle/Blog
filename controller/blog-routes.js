@@ -28,7 +28,9 @@ router.put("/blogger/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+router.get("/dummyAPIindex", (req, res) => {
+  res.status(200).json({ message: "Dummy route worked" });
+});
 router.delete("/blogger/:id", async (req, res) => {
   try {
     await BlogPost.findOneAndDelete({ _id: req.params.id });
