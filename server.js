@@ -16,7 +16,7 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 const sess = {
-  secret: process.env.SECRET,
+  secret: "Secretive",
   cookie: {},
   resave: false,
   saveUninitialized: true,
@@ -24,18 +24,18 @@ const sess = {
     db: sequelize
   })
 };
-
+app.use(session(sess));
 app.get("/", (req, res) => {
   res.render("main", { layout: "index" });
 });
 
-app.use(
-  session({
-    secret: "Secretive",
-    resave: false,
-    saveUninitialized: true
-  })
-);
+// app.use(
+//   session({
+//     secret: "Secretive",
+//     resave: false,
+//     saveUninitialized: true
+//   })
+// );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

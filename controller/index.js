@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const blogRoutes = require("./blog-routes");
-const userRoutes = require("./api/user-routes");
-
-router.use("/", blogRoutes);
-router.use("/api", userRoutes);
+const apiRoutes = require("./api");
+const renderRoutes = require("./renderRoutes");
+router.use("/", renderRoutes);
+router.use("/api", apiRoutes);
 
 // Define other routes for CRUD operations, such as creating, updating, and deleting blog posts
 

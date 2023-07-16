@@ -4,7 +4,7 @@ const getBlog = async event => {
   let title = document.querySelector("#new-title").value;
 
   if (title) {
-    const response = await fetch("/api/users", {
+    const response = await fetch("/", {
       method: "GET",
       body: JSON.stringify({ title }),
       headers: { "Content-Type": "application/json" }
@@ -22,7 +22,20 @@ function updateBlogPost() {
   // const query = `UPDATE BlogPost SET text = ${UpText} WHERE title = ${Upper}`;
   // const values = [blogPost.title, blogPost.text];
   // connection.query(query, values, (error, results) => {
-  if (error) throw error;
+  // if (error) throw error;
+
+  //DO A FETCH HERE
+  // const response = await fetch("/", {
+  //   method: "PUT",
+  //   body: JSON.stringify({ title }),
+  //   headers: { "Content-Type": "application/json" }
+  // });
+
+  // if (response.ok) {
+  //   res.render(response);
+  // } else {
+  //   alert("Failed to update that blog post.");
+  // }
 
   results = console.log("Blog post updated successfully!");
 }
